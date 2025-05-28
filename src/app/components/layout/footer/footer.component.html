@@ -1,0 +1,61 @@
+<div class="wrapper">
+    <div class="container">
+        <div class="main-content">
+            <div class="logo">
+                <img width="148" height="100" src="assets/img/logo-white.webp" class="logo" routerLink="" alt="An image of the logo">
+            </div>
+
+            @if (dimensionsService.isDesktop) {
+                <!-- <div class="nav-links">
+                    <a routerLink="blog">Блог</a>
+                    <a routerLink="galleries">Галерия</a>
+                    <a routerLink="video">Видео</a>
+                </div> -->
+
+                <div class="nav-links">
+                    <a routerLink="za-nas">За Нас</a>
+                    <a routerLink="kontakti">Контакти</a>
+                </div>
+            } @else {
+                <div class="mobile-nav-links">
+                    <!-- <div>
+                        <a routerLink="blog">Блог</a>
+                        <a routerLink="galleries">Галерия</a>
+                    </div> -->
+
+                    <div>
+                        <!-- <a routerLink="video">Видео</a> -->
+                        <a routerLink="za-nas">За Нас</a>
+                        <a routerLink="kontakti">Контакти</a>
+                    </div>
+                </div>
+            }
+
+            <div class="nav-links">
+                <div class="contacts">
+                    <div>northwesterngood&#64;gmail.com</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="secondary-content">
+            <div class="copyright">
+                <!-- &copy; 2025 ЛОЗАНОВИ-ВД. Всички права запазени. -->
+                &copy; 2025 ЛОЗАНОВИ-ВД.
+            </div>
+
+            <div class="social-network">
+                <a href="https://www.facebook.com/profile.php?id=61575249095133 " target="_blank"><img src="assets/img/facebook-white.svg" alt="An image of the Facebook logo"></a>
+                <a href="https://www.instagram.com/northwesterngood/" target="_blank"><img src="assets/img/instagram-white.svg" alt="An image of the Instagram logo"></a>
+                <a href="https://www.tiktok.com/@northwesterngood " target="_blank"><img src="assets/img/tiktok-white.svg" alt="An image of the TikTok logo"></a>
+                <a href="https://www.youtube.com/@northwesterngood" target="_blank"><img src="assets/img/youtube-white.svg" alt="An image of the YouTube logo"></a>
+            </div>
+
+            <div>
+                <a routerLink="kontakti">Свържете се с нас</a>
+            </div>
+        </div>
+    </div>
+</div>

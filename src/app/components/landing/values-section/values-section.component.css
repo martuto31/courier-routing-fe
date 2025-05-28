@@ -1,0 +1,54 @@
+.heading {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+}
+
+.heading h1 {
+  text-align: center;
+  font-size: 44px;
+  margin-bottom: 4px;
+}
+
+.heading .line {
+  align-self: center;
+  height: 4px;
+  width: 140px;
+  background-color: var(--primary-brand);
+}
+
+:host-context(.mobile) .heading .line,
+:host-context(.tablet) .heading .line {
+  width: 100px;
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+:host-context(.mobile) .items,
+:host-context(.tablet) .items {
+  flex-direction: column;
+  align-items: center;
+  gap: 46px;
+}
+
+.item {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+:host-context(.mobile) .item {
+  width: 100%;
+}
+
+.item .text {
+  line-height: 26px;
+  color: var(--font-medium-emphasis);
+}

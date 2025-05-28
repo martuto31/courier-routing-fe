@@ -1,0 +1,162 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+}
+
+:host-context(.mobile) h2,
+:host-context(.tablet) h2 {
+  text-align: center;
+}
+
+:host-context(.mobile) .container,
+:host-context(.tablet) .container {
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.description {
+  margin-bottom: 16px;
+}
+
+.left {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.links {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.links a {
+  color: var(--bg-line);
+}
+
+.links a img {
+  width: 30px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-info > :first-child {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.contact-me {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.heading h2 {
+    font-size: 44px;
+    margin-bottom: 4px;
+}
+
+:host-context(.mobile) .heading .line,
+:host-context(.tablet) .heading .line {
+  align-self: center;
+  height: 4px;
+  width: 100px;
+  background-color: var(--primary-brand);
+}
+
+:host-context(.tablet) .right,
+:host-context(.mobile) .right {
+  width: 100%;
+}
+
+.form {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+
+:host-context(.tablet) .form,
+:host-context(.mobile) .form {
+    width: 100%;
+    max-width: 500px;
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container > span,
+.text-area-container > span {
+    margin-bottom: 8px;
+    color: var(--font-high-emphasis);
+}
+
+.input-field {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-black);
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.input-field input {
+    width: 100%;
+    min-width: 120px;
+    height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--font-high-emphasis);
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.text-area-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-area-container textarea {
+    width: 100%;
+    min-height: 160px;
+    font-size: 14px;
+    color: var(--font-high-emphasis);
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-black);
+    border-radius: 8px;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.contact-me a {
+    align-self: flex-start;
+}
+
+.error {
+    font-size: 14px;
+    color: var(--error-color);
+    padding-top: 6px;
+}

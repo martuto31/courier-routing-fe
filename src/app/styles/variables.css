@@ -1,0 +1,24 @@
+ :root {
+    /* Background */
+    --bg-white: #FFFFFF;
+    --bg-gray: #F9FAFF;
+    --bg-line: #25282B;
+
+    /* Brand */
+    --primary-brand: #F63B3B;
+    --secondary-brand: #004AAD;
+
+    /* Text */
+    --font-low-emphasis: #9A9FA8;
+    /* --font-medium-emphasis: #828282; */
+    --font-medium-emphasis: #646464;
+    --font-high-emphasis: #25282B;
+    --font-white: #FFFFFF;
+
+    /* Form */
+    --border-white: #E8ECF4;
+    --border-black: rgb(186, 194, 206);
+
+    /* Error */
+    --error-color: #D32F2F;
+ }

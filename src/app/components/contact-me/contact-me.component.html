@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="left">
+    <div class="heading">
+      <h2>Свържете се с нас</h2>
+
+      <div class="line"></div>
+    </div>
+
+    <div class="description">
+      <span>Ако се нуждаете от помощ, или пък искате да предоставите такава, да станем партньори или да получите повече информация за дейностите ни - пишете ни!</span>
+    </div>
+
+    <div class="contact-info">
+      <div>Имейл:</div>
+
+      <div>northwesterngood&#64;gmail.com</div>
+    </div>
+
+    <div class="links">
+      <a href="https://www.facebook.com/profile.php?id=61575249095133" target="_blank"><img src="assets/img/facebook-dark.svg"  alt="An image of the Facebook logo"></a>
+      <a href="https://www.instagram.com/northwesterngood/" target="_blank"><img src="assets/img/instagram-dark.svg"  alt="An image of the Instagram logo"></a>
+      <a href="https://www.tiktok.com/@northwesterngood " target="_blank"><img src="assets/img/tiktok-dark.svg"  alt="An image of the TikTok logo"></a>
+      <a href="https://www.youtube.com/@northwesterngood" target="_blank"><img src="assets/img/youtube-dark.svg"  alt="An image of the YouTube logo"></a>
+    </div>
+  </div>
+
+  <div class="right">
+    <div id="contact-me" class="contact-me">
+      <div class="form" [formGroup]="formGroup">
+          <div class="input-container">
+              <span>Имена</span>
+
+              <div class="input-field">
+                  <input formControlName="name">
+              </div>
+
+              @if (hasError('name', 'required')) {
+                  <div class="error">* Моля попълнете празното поле</div>
+              }
+          </div>
+
+          <div class="input-container">
+              <span>Имейл</span>
+
+              <div class="input-field">
+                  <input formControlName="email">
+              </div>
+
+              @if (hasError('email', 'required')) {
+                  <div class="error">* Моля попълнете празното поле</div>
+              } @else if (hasError('email', 'pattern')) {
+                  <div class="error">* Моля въведете валиден имейл адрес</div>
+              }
+          </div>
+
+          <div class="text-area-container">
+              <span>Съобщение</span>
+
+              <div class="text-area">
+                  <textarea formControlName="message"></textarea>
+              </div>
+
+              @if (hasError('message', 'required')) {
+                  <div class="error">* Моля попълнете празното поле</div>
+              }
+          </div>
+
+          <a class="btn btn-primary" (click)="sendEmail()" href="#" role="button" aria-label="Send email request">Изпратете съобщението</a>
+      </div>
+    </div>
+  </div>
+</div>

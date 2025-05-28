@@ -1,0 +1,79 @@
+.container {
+  width: 100vw;
+  height: 540px;
+  max-height: 100%;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  background-image: url('https://pub-a9cc06a1001949d9ba4ada8f3dab7855.r2.dev/assets/landing-caring-section.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+:host-context(.tablet) .container {
+  height: 500px;
+}
+
+:host-context(.mobile) .container {
+  height: 500px;
+}
+
+.hero-wrapper {
+  /* TODO: From the layout! Extremely bad practice! */
+  max-width: 1400px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 24px 16px;
+  padding-bottom: 0px;
+  margin: 0 auto;
+}
+
+:host-context(.tablet) .hero-wrapper {
+  max-width: 760px;
+}
+
+:host-context(.mobile) .hero-wrapper {
+  max-width: 400px;
+}
+
+.header-container {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  text-align: center;
+  color: var(--font-white);
+}
+
+.header-container h1 {
+  font-size: 60px;
+  color: var(--font-white);
+  margin-bottom: 28px;
+}
+
+:host-context(.tablet) .header-container h1 {
+  font-size: 48px;
+}
+
+:host-context(.mobile) .header-container h1 {
+  font-size: 38px;
+}
+
+.header-container span {
+  max-width: 100%;
+  width: 50ch;
+  font-size: 24px;
+  margin-bottom: 0px;
+  color: #ebebeb;
+}
+
+:host-context(.tablet) .header-container span,
+:host-context(.mobile) .header-container span {
+  font-size: 20px;
+}

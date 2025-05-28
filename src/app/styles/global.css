@@ -1,0 +1,29 @@
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Overpass', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    /* color: var(--font-low-emphasis); */
+    background-color: var(--bg-gray);
+    margin: 0;
+    padding: 0;
+}
+
+mark {
+    color: var(--primary-brand);
+    background: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.section-space {
+    height: 100px;
+}
+
+.tablet .section-space,
+.mobile .section-space {
+    height: 60px;
+}

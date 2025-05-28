@@ -1,0 +1,99 @@
+.container {
+  width: 100vw;
+  height: 680px;
+  max-height: 100%;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  background-image: url('https://pub-a9cc06a1001949d9ba4ada8f3dab7855.r2.dev/assets/hero-min.webp');
+  background-size: cover;
+  background-position: center;
+
+  margin-top: -40px; /* TODO: Navigation margin. Extremely bad practice! Fix in the future! */
+}
+
+:host-context(.tablet) .container {
+  height: 620px;
+  margin-top: -14px; /* 36px - 8px -24px */
+}
+
+:host-context(.mobile) .container {
+  height: 580px;
+  margin-top: -14px; /* 36px - 8px */
+}
+
+.hero-wrapper {
+  /* TODO: From the layout! Extremely bad practice! */
+  width: 100%;
+  height: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 24px 16px;
+  padding-bottom: 0px;
+  margin: 0 auto;
+}
+
+:host-context(.tablet) .hero-wrapper {
+  max-width: 760px;
+}
+
+:host-context(.mobile) .hero-wrapper {
+  max-width: 400px;
+}
+
+.header-container {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--font-white);
+}
+
+:host-context(.tablet) .header-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+:host-context(.mobile) .header-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.header-container h1 {
+  font-size: 60px;
+  line-height: 76px;
+  color: var(--font-white);
+  margin-bottom: 0px;
+}
+
+:host-context(.tablet) .header-container h1 {
+  font-size: 48px;
+  line-height: unset;
+}
+
+:host-context(.mobile) .header-container h1 {
+  font-size: 38px;
+  line-height: unset;
+}
+
+.header-container span {
+  max-width: 100%;
+  width: 40ch;
+  font-size: 24px;
+  margin-bottom: 0px;
+}
+
+:host-context(.tablet) .header-container span,
+:host-context(.mobile) .header-container span {
+  font-size: 20px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+}

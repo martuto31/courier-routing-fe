@@ -1,0 +1,27 @@
+.btn {
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px 24px;
+}
+
+.tablet .btn,
+.mobile .btn {
+    font-size: 16px;
+    padding: 6px 18px;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-primary {
+    color: var(--font-white);
+    background-color: var(--primary-brand);
+}
+
+.btn-secondary {
+    color: var(--font-high-emphasis);
+    background-color: var(--bg-white);
+    border: 1px solid var(--font-high-emphasis);
+}
