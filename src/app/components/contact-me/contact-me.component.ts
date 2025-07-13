@@ -3,10 +3,6 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import emailjs from '@emailjs/browser';
-
-import emailJsCredentials from './../../../assets/email-js-credentials.json';
-
 interface FormControls {
   name: FormControl<string | null>;
   email: FormControl<string | null>;
@@ -30,7 +26,6 @@ export class ContactMeComponent {
     private formBuilder: FormBuilder) {
 
     this.createForm();
-    this.emailJsInit();
   }
 
   public formGroup!: FormGroup<FormControls>;
@@ -48,16 +43,16 @@ export class ContactMeComponent {
       message: this.formGroup.controls.message.value,
     };
 
-    emailjs.send(emailJsCredentials.serviceId, emailJsCredentials.templateId, templateParams).then(
-      (response) => {
-        this.formGroup.reset();
+    // emailjs.send(emailJsCredentials.serviceId, emailJsCredentials.templateId, templateParams).then(
+    //   (response) => {
+    //     this.formGroup.reset();
 
-        this.openSnackBar('Съобщението е изпратено успешно!', 'success');
-      },
-      (error) => {
-        this.snackBar.open('Възникна грешка!', 'error');
-      },
-    );
+    //     this.openSnackBar('Съобщението е изпратено успешно!', 'success');
+    //   },
+    //   (error) => {
+    //     this.snackBar.open('Възникна грешка!', 'error');
+    //   },
+    // );
   }
 
   public hasError(controlName: string, errorName: string) {
@@ -81,12 +76,6 @@ export class ContactMeComponent {
     };
 
     this.formGroup = this.formBuilder.group(formControls);
-  }
-
-  private emailJsInit(): void {
-    emailjs.init({
-      publicKey: emailJsCredentials.publicKey,
-    });
   }
 
 }

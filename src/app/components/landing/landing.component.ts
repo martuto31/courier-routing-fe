@@ -5,7 +5,6 @@ import { ContactMeComponent } from './../contact-me/contact-me.component';
 import { IntroSectionComponent } from './intro-section/intro-section.component';
 import { ValuesSectionComponent } from './values-section/values-section.component';
 import { CaringSectionComponent } from './caring-section/caring-section.component';
-import { BlogArticlesSectionComponent } from "./blog-articles-section/blog-articles-section.component";
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +16,6 @@ import { BlogArticlesSectionComponent } from "./blog-articles-section/blog-artic
     IntroSectionComponent,
     ValuesSectionComponent,
     CaringSectionComponent,
-    BlogArticlesSectionComponent,
   ],
 })
 

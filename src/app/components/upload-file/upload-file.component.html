@@ -1,0 +1,19 @@
+<div class="upload-container">
+     <div 
+        class="upload-placeholder" 
+        (drop)="fileDrop($event)" 
+        (dragover)="dragOver($event)" 
+        (click)="openFile()">
+
+        <input #uploadFile (change)="fileInput($event)" type="file" accept=".xlsx,.csv" hidden />
+
+        <label for="file-upload" class="upload-label">Click or Drag to upload</label>
+    </div>
+
+    @if (selectedFile) {
+        <div class="file-details">
+            <p>File selected: {{ selectedFile.name }}</p>
+            <button class="send-button" (click)="sendFile()">Send File</button>
+        </div>
+    }
+</div>

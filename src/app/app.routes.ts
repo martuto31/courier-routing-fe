@@ -4,18 +4,19 @@ import { authGuard } from './components/guards/auth.guard';
 export const routes: Routes = [
     {
       path: '',
-      loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent),
+      // loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent),
+      loadComponent: () => import('./components/upload-file/upload-file.component').then(c => c.UploadFileComponent),
       title: '',
     },
     {
       path: 'za-nas',
       loadComponent: () => import('./components/about-me/about-me.component').then(c => c.AboutMeComponent),
-      title: 'Нашата мисия и истории',
+      title: '',
     },
     {
-      path: 'kontakti',
-      loadComponent: () => import('./components/contact-me/contact-me.component').then(c => c.ContactMeComponent),
-      title: 'Свържи се с нас',
+      path: 'upload-file',
+      loadComponent: () => import('./components/upload-file/upload-file.component').then(c => c.UploadFileComponent),
+      title: '',
     },
 
     // {
