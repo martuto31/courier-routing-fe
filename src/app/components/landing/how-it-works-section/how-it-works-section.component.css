@@ -1,13 +1,35 @@
+:host {
+  position: relative;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  padding: 60px 0px;
+}
+
+.container-bg {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  background: #f1f1f1;
+  pointer-events: none;
+}
+
 .heading {
   display: flex;
   flex-direction: column;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .heading h1 {
   text-align: center;
   font-size: 44px;
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */
 }
 
 .heading .line {
@@ -24,19 +46,19 @@
 
 .items {
   display: flex;
-  justify-content: space-between;
-  gap: 30px;
+  justify-content: center;
+  gap: 120px;
 }
 
 :host-context(.mobile) .items,
 :host-context(.tablet) .items {
   flex-direction: column;
   align-items: center;
-  gap: 46px;
+  gap: 60px;
 }
 
 .item {
-  width: 400px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,11 +66,13 @@
   gap: 12px;
 }
 
-:host-context(.mobile) .item {
-  width: 100%;
-}
-
 .item .text {
   line-height: 26px;
   color: var(--font-medium-emphasis);
+}
+
+.icon img {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
 }
