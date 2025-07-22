@@ -1,18 +1,22 @@
  :root {
     /* Background */
     --bg-white: #FFFFFF;
-    --bg-gray: #F9FAFF;
+    --bg-gray: #F9FAFB;
     --bg-line: #25282B;
 
     /* Brand */
-    --primary-brand: #F63B3B;
-    --secondary-brand: #004AAD;
+    --primary-brand: #3578E5;
+    /* --secondary-brand: #004AAD; */
+
+    /* Button */
+    --cta-button: #2563EB;
+    --cta-button-hover: #1D4ED8;
 
     /* Text */
     --font-low-emphasis: #9A9FA8;
     /* --font-medium-emphasis: #828282; */
-    --font-medium-emphasis: #646464;
-    --font-high-emphasis: #25282B;
+    --font-medium-emphasis: #6B7280;
+    --font-high-emphasis: #23272F;
     --font-white: #FFFFFF;
 
     /* Form */
@@ -21,4 +25,4 @@
 
     /* Error */
     --error-color: #D32F2F;
- }
+}

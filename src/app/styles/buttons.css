@@ -17,7 +17,11 @@
 
 .btn-primary {
     color: var(--font-white);
-    background-color: var(--primary-brand);
+    background-color: var(--cta-button);
+}
+
+.btn-primary:hover {
+    background-color: var(--cta-button-hover);
 }
 
 .btn-secondary {

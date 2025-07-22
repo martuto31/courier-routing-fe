@@ -3,7 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { ContactMeComponent } from './../contact-me/contact-me.component';
 import { IntroSectionComponent } from './intro-section/intro-section.component';
-import { UploadSectionComponent } from "./upload-section/upload-section.component";
 import { HowItWorksSectionComponent } from "./how-it-works-section/how-it-works-section.component";
 
 @Component({
@@ -14,7 +13,6 @@ import { HowItWorksSectionComponent } from "./how-it-works-section/how-it-works-
   imports: [
     ContactMeComponent,
     IntroSectionComponent,
-    UploadSectionComponent,
     HowItWorksSectionComponent,
   ],
 })
