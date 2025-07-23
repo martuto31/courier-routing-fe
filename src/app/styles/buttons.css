@@ -1,8 +1,9 @@
 .btn {
     font-size: 18px;
+    font-weight: 500;
     border-radius: 8px;
     cursor: pointer;
-    padding: 8px 24px;
+    padding: 16px 30px;
 }
 
 .tablet .btn,
