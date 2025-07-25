@@ -1,0 +1,25 @@
+.container {
+
+}
+
+.left .items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.left .items > div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.left .items .icon img {
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+}
+
+.right {
+
+}

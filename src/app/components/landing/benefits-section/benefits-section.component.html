@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="left">
+        <h2>Основни предимства</h2>
+
+        <div class="items">
+            @for (item of benefits; track $index) {
+                <div>
+                    <div class="icon">
+                        <img [src]="item.iconSrc" [alt]="item.iconAlt">
+                    </div>
+
+                    <span class="text-medium">{{ item.text }}</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="right">
+        <img src="" alt="">
+    </div>
+</div>
