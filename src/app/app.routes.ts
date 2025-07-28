@@ -20,6 +20,12 @@ export const routes: Routes = [
       title: '',
     },
 
+    {
+      path: 'optimizirai-marshrut',
+      loadComponent: () => import('./components/routing/routing.component').then(c => c.RoutingComponent),
+      title: '',
+    },
+
     // {
     //   path: 'login',
     //   loadComponent: () => import('./components/auth/login/login.component').then(c => c.LoginComponent),
