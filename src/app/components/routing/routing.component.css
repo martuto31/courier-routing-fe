@@ -17,3 +17,7 @@
     color: var(--primary-brand);
     font-weight: 600;
 }
+
+.upload-file-container {
+    margin-top: 24px;
+}

@@ -7,13 +7,13 @@
 
         <input #uploadFile (change)="fileInput($event)" type="file" accept=".xlsx,.csv" hidden />
 
-        <label for="file-upload" class="upload-label">Click or Drag to upload</label>
+        <label for="file-upload" class="upload-label">Избери файл или го пусни тук</label>
     </div>
 
     @if (selectedFile) {
         <div class="file-details">
-            <p>File selected: {{ selectedFile.name }}</p>
-            <button class="send-button" (click)="sendFile()">Send File</button>
+            <p>Избран файл: {{ selectedFile.name }}</p>
+            <button class="send-button" (click)="sendFile()">Изпрати файла</button>
         </div>
     }
 </div>

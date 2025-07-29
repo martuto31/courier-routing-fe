@@ -1,9 +1,10 @@
 .upload-container {
   width: 100%;
   max-width: 400px;
+  text-align: center;
   margin: auto;
   padding: 20px;
-  text-align: center;
+  box-sizing: border-box;
 }
 
 .upload-placeholder {
@@ -11,8 +12,9 @@
   justify-content: center;
   align-items: center;
   border: 2px dashed #ccc;
+  background-color: var(--bg-white);
   border-radius: 10px;
-  padding: 40px;
+  padding: 80px;
   cursor: pointer;
   font-size: 16px;
   color: #666;
