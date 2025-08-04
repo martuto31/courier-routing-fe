@@ -7,7 +7,7 @@ import { GeocodedAddress, GetOptimisedRouteResponse, OrderedLocation } from './.
 @Component({
   selector: 'app-routing',
   templateUrl: './routing.component.html',
-  styleUrls: ['./routing.component.css'],
+  styleUrls: ['./routing.component.css', './../../styles/buttons.css'],
   standalone: true,
   imports: [
     MapboxComponent,
@@ -44,6 +44,14 @@ export class RoutingComponent {
       lon: address.lon,
       label: address.address
     })) ?? [];
+  }
+
+  public reset(): void {
+    this.isOptimisedRouteLoaded = false;
+    this.optimisedRoutePins = [];
+    this.optimisedRouteUrl = null
+    this.optimisedRoutes = null;
+    this.unOptimisedRoutes = null;
   }
 
 }
