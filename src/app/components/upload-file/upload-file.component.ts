@@ -23,6 +23,8 @@ export class UploadFileComponent {
 
   constructor(private routingService: RoutingService) { }
 
+  public isLoading = false;
+
   public selectedFile: File | null = null;
 
   public openFile(): void {
@@ -52,6 +54,8 @@ export class UploadFileComponent {
   }
 
   public async sendFile(): Promise<void> {
+    this.isLoading = true;
+
     const formData = new FormData();
 
     if (this.selectedFile) {
@@ -60,6 +64,8 @@ export class UploadFileComponent {
 
     const request = this.routingService.getOptimisedRouteFromFile(formData);
     const response = await lastValueFrom(request);
+
+    this.isLoading = false;
 
     if (response.status === 200) {
       const result = response.data ?? null;
