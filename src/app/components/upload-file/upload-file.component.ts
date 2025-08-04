@@ -1,7 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RoutingService } from '../../services/routing.service';
+
 import { lastValueFrom } from 'rxjs';
+
+import { RoutingService } from './../../services/routing.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -15,9 +17,11 @@ import { lastValueFrom } from 'rxjs';
 
 export class UploadFileComponent {
 
-  constructor(private routingService: RoutingService) { }
+  @Output() getOptimisedRouteResponse = new EventEmitter<any>();
 
   @ViewChild('uploadFile') uploadFile!: ElementRef<HTMLInputElement>;
+
+  constructor(private routingService: RoutingService) { }
 
   public selectedFile: File | null = null;
 
@@ -56,6 +60,12 @@ export class UploadFileComponent {
 
     const request = this.routingService.getOptimisedRouteFromFile(formData);
     const response = await lastValueFrom(request);
+
+    if (response.status === 200) {
+      const result = response.data ?? null;
+
+      this.getOptimisedRouteResponse.emit(result);
+    }
   }
 
 }

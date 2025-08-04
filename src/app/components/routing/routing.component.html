@@ -1,11 +1,71 @@
 <div class="container">
-    <h1>Качи файл с адреси</h1>
+    @if (!isOptimisedRouteLoaded) {
+        <h1>Качи файл с адреси</h1>
 
-    <div class="text-medium">Качете CSV или Excel файл с адреси, които искате да оптимизирате</div>
-    <div class="highlight">Изтегли примерен файл</div>
+        <div class="text-medium">Качете CSV или Excel файл с адреси, които искате да маршрутизирате</div>
+        <a href="assets/example.xlsx" download class="highlight">Изтегли примерен файл</a>
 
-    <div class="upload-file-container">
+        <div class="upload-file-container">
 
-    </div>
-    <app-upload-file></app-upload-file>
+        </div>
+
+        <app-upload-file (getOptimisedRouteResponse)="onGetOptimisedRouteResponse($event)"></app-upload-file>
+    } @else {
+        <h1>Резултати от оптимизацията на маршрута</h1>
+
+        <div class="map">
+            @if (optimisedRoutePins.length > 0) {
+                <div class="map-container">
+                    <h4>Оптимизиран маршрут</h4>
+
+                    <app-mapbox [pins]="optimisedRoutePins"></app-mapbox>
+                </div>
+            }
+        </div>
+
+        @if (optimisedRoutes && optimisedRoutes.length > 0 && unOptimisedRoutes && unOptimisedRoutes.length > 0) {
+            <div class="addresses-list">
+                <div class="left">
+                    <h4>Входни адреси</h4>
+
+                    <ol>
+                        @for (route of unOptimisedRoutes; track $index) {
+                            <li>
+                                {{ route.address }}
+                            </li>
+                        }
+                    </ol>
+                </div>
+                <div class="right">
+                    <h4>Оптимизирани адреси</h4>
+
+                    <ol>
+                        @for (route of optimisedRoutes; track $index) {
+                            <li>
+                                {{ route.address }}
+                            </li>
+                        }
+                    </ol>
+                </div>
+            </div>
+        }
+
+        @if (optimisedRouteUrl) {
+            <div class="map-link">
+                <a [href]="optimisedRouteUrl" target="_blank" rel="noopener">
+                    Виж маршрута в Google Maps
+                </a>
+            </div>
+
+            <!-- TODO: Donwload as PDF -->
+            <!-- TODO: Upload new file -->
+            <!-- TODO: Add loader -->
+            <!-- TODO: Add mapper -->
+            <!-- TODO: Add priority to work with only has and doesnt have priority -->
+            <!-- TODO: Scan QR to open routes -->
+            <!-- TODO: Make multiple google maps addresses if they are more than google can handle in 1 route -->
+            <!-- TODO: Add statistics to the route -->
+            <!-- TODO: Deploy -->
+        }
+    }
 </div>

@@ -16,8 +16,21 @@
     font-size: 16px;
     color: var(--primary-brand);
     font-weight: 600;
+    cursor: pointer;
 }
 
 .upload-file-container {
     margin-top: 24px;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.addresses-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }

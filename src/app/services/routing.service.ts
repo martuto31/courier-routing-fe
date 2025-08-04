@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { ApiResponse, HttpService } from './http.service';
 
+import { GetOptimisedRouteResponse } from './../models/routing.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,7 @@ export class RoutingService {
 
   private apiUrl: string = "http://localhost:3000/api/";
 
-  public getOptimisedRouteFromFile(formData: FormData): Observable<ApiResponse<void>> {
+  public getOptimisedRouteFromFile(formData: FormData): Observable<ApiResponse<GetOptimisedRouteResponse>> {
     const url = this.apiUrl + 'routing/optimised-route';
 
     return this.httpService.post(url, formData);

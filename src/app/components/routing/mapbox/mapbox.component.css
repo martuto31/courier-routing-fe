@@ -1,0 +1,11 @@
+.map {
+    max-width: 100%;
+    width: 800px;
+    height: 500px;
+}
+
+
+:host-context(.tablet) .map,
+:host-context(.mobile) .map {
+    width: 100%;
+}

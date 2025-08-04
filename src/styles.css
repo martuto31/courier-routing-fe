@@ -4,3 +4,5 @@
 @import './app/styles//buttons.css';
 @import './app/styles/variables.css';
 @import './app/styles/custom-material.css';
+
+@import "mapbox-gl/dist/mapbox-gl.css";
