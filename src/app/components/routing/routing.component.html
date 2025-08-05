@@ -53,21 +53,24 @@
                 <a [href]="optimisedRouteUrl" target="_blank" rel="noopener">
                     Виж маршрута в Google Maps
                 </a>
+
+                <qrcode [qrdata]="optimisedRouteUrl" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
             </div>
 
-            <!-- TODO: Link to google maps loaded with the initial addresses -->
-            <!-- TODO: Donwload as PDF -->
-            <!-- TODO: Upload new file -->
             <!-- TODO: Add mapper -->
-            <!-- TODO: Add priority to work with only has and doesnt have priority -->
-            <!-- TODO: Scan QR to open routes -->
-            <!-- TODO: Make multiple google maps addresses if they are more than google can handle in 1 route -->
+            <!-- TODO: Link to google maps loaded with the initial addresses -->
             <!-- TODO: Add statistics to the route -->
+            <!-- TODO: Make multiple google maps addresses if they are more than google can handle in 1 route -->
+            <!-- TODO: Donwload as PDF -->
             <!-- TODO: Deploy -->
+
+            <!-- TODO: Add priority to work with only has and doesnt have priority -->
         }
 
         <a class="btn btn-primary" (click)="reset()">
             Качи нов файл
         </a>
+
+        
     }
 </div>

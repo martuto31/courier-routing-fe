@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 import { MapboxComponent, MapboxPins } from './mapbox/mapbox.component';
 import { UploadFileComponent } from './../upload-file/upload-file.component';
 import { GeocodedAddress, GetOptimisedRouteResponse, OrderedLocation } from './../../models/routing.model';
@@ -10,6 +12,7 @@ import { GeocodedAddress, GetOptimisedRouteResponse, OrderedLocation } from './.
   styleUrls: ['./routing.component.css', './../../styles/buttons.css'],
   standalone: true,
   imports: [
+    QRCodeModule,
     MapboxComponent,
     UploadFileComponent,
   ],
