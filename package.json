@@ -20,11 +20,12 @@
     "@angular/platform-browser": "17.0.0",
     "@angular/platform-browser-dynamic": "17.0.0",
     "@angular/router": "17.0.0",
-    "angularx-qrcode": "^17.0.1",
+    "angularx-qrcode": "17.0.0",
     "firebase": "11.6.0",
     "mapbox-gl": "3.13.0",
     "rxjs": "~7.8.0",
     "tslib": "2.3.0",
+    "xlsx": "0.18.5",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@angular/cli": "17.0.0",
     "@angular/compiler-cli": "17.0.0",
     "@types/node": "22.5.2",
+    "@types/qrcode": "^1.5.5",
     "typescript": "~5.2.2"
   }
 }

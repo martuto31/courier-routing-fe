@@ -1,25 +1,63 @@
 <div class="upload-container">
-     <div 
-        class="upload-placeholder" 
-        (drop)="fileDrop($event)" 
-        (dragover)="dragOver($event)" 
-        (click)="openFile()">
+  <div class="upload-placeholder" (drop)="fileDrop($event)" (dragover)="dragOver($event)" (click)="openFile()">
+    <input #uploadFile (change)="fileInput($event)" type="file" accept=".xlsx,.csv" hidden />
+    <label class="upload-label">Избери файл или го пусни тук</label>
+  </div>
 
-        <input #uploadFile (change)="fileInput($event)" type="file" accept=".xlsx,.csv" hidden />
+  @if (selectedFile) {
+    <div class="file-details">
+      <p>Избран файл: {{ selectedFile.name }}</p>
 
-        <label for="file-upload" class="upload-label">Избери файл или го пусни тук</label>
-    </div>
+      <!-- Mapping UI -->
+      @if (headers?.length) {
+        <form [formGroup]="mapForm" class="mapping">
+          <div class="row">
+            <label>Има заглавен ред?</label>
+            <input type="checkbox" formControlName="hasHeader" />
+          </div>
 
-    @if (selectedFile) {
-        <div class="file-details">
-            <p>Избран файл: {{ selectedFile.name }}</p>
-            <button class="send-button" (click)="sendFile()">Изпрати файла</button>
+          <div class="row">
+            <label>Адрес колона *</label>
+            <select formControlName="address">
+              <option value="">-- Избери --</option>
+              <option *ngFor="let h of headers" [value]="h">{{ h }}</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label>Приоритет колона (по избор)</label>
+            <select formControlName="priority">
+              <option value="">-- Няма --</option>
+              <option *ngFor="let h of headers" [value]="h">{{ h }}</option>
+            </select>
+          </div>
+        </form>
+
+        <!-- Preview -->
+        <div class="preview">
+          <div class="preview-title">Преглед (първите 5 реда)</div>
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let h of headers">{{ h }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of previewRows">
+                <td *ngFor="let cell of row">{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    }
+      }
+
+      <button class="send-button" [disabled]="mapForm.invalid" (click)="sendFile()">Изпрати файла</button>
+    </div>
+  }
 </div>
 
 @if (isLoading) {
-    <div class="loader-container">
-        <div class="loader"></div>
-    </div>
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
 }
