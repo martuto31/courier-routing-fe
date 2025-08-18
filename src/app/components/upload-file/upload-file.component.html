@@ -1,11 +1,12 @@
-<div class="upload-container">
-  <div class="upload-placeholder" (drop)="fileDrop($event)" (dragover)="dragOver($event)" (click)="openFile()">
-    <input #uploadFile (change)="fileInput($event)" type="file" accept=".xlsx,.csv" hidden />
+<div class="upload-container" (drop)="fileDrop($event)" (dragover)="dragOver($event)" (click)="openFile()">
+  <input #uploadFile (change)="fileInput($event)" type="file" accept=".xlsx,.csv" hidden />
+
+  <div class="upload-placeholder">
     <label class="upload-label">Избери файл или го пусни тук</label>
   </div>
 
   @if (selectedFile) {
-    <div class="file-details">
+    <div class="file-details" (click)="$event.stopPropagation()">
       <p>Избран файл: {{ selectedFile.name }}</p>
 
       <!-- Mapping UI -->
