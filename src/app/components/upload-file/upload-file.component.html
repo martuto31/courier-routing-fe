@@ -9,44 +9,58 @@
     <div class="file-details" (click)="$event.stopPropagation()">
       <p>Избран файл: {{ selectedFile.name }}</p>
 
-      <!-- Mapping UI -->
       @if (headers?.length) {
         <form [formGroup]="mapForm" class="mapping">
           <div class="row">
             <label>Има заглавен ред?</label>
+
             <input type="checkbox" formControlName="hasHeader" />
           </div>
 
           <div class="row">
             <label>Адрес колона *</label>
+
             <select formControlName="address">
               <option value="">-- Избери --</option>
-              <option *ngFor="let h of headers" [value]="h">{{ h }}</option>
+
+              @for (header of headers; track $index) {
+                <option [value]="header">{{ header }}</option>
+              }
             </select>
           </div>
 
           <div class="row">
             <label>Приоритет колона (по избор)</label>
+
             <select formControlName="priority">
               <option value="">-- Няма --</option>
-              <option *ngFor="let h of headers" [value]="h">{{ h }}</option>
+
+              @for (header of headers; track $index) {
+                <option [value]="header">{{ header }}</option>
+              }
             </select>
           </div>
         </form>
 
-        <!-- Preview -->
         <div class="preview">
           <div class="preview-title">Преглед (първите 5 реда)</div>
+
           <table>
             <thead>
               <tr>
-                <th *ngFor="let h of headers">{{ h }}</th>
+                @for (header of headers; track $index) {
+                  <th>{{ header }}</th>
+                }
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of previewRows">
-                <td *ngFor="let cell of row">{{ cell }}</td>
-              </tr>
+              @for (row of previewRows; track $index) {
+                <tr>
+                  @for (cell of row; track $index) {
+                    <td>{{ cell }}</td>
+                  }
+                </tr>
+              }
             </tbody>
           </table>
         </div>
