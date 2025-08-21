@@ -24,7 +24,7 @@ export class RoutingComponent {
 
   public optimisedRoutePins: MapboxPins[] = [];
 
-  public optimisedRouteUrl: string | null = null;
+  public optimisedRouteUrls: string[] | null = null;
   public optimisedRoutes: OrderedLocation[] | null = null;
   public unOptimisedRoutes: GeocodedAddress[] | null = null;
 
@@ -35,7 +35,7 @@ export class RoutingComponent {
 
     this.isOptimisedRouteLoaded = true;
 
-    this.optimisedRouteUrl = getOptimisedRouteResponse.optimisedRoute.googleMapsUrl;
+    this.optimisedRouteUrls = getOptimisedRouteResponse.optimisedRoute.googleMapsUrls;
     this.optimisedRoutes = getOptimisedRouteResponse.optimisedRoute.locationOrder;
     this.unOptimisedRoutes = [
       ...getOptimisedRouteResponse.unoptimisedGeoAddresses,
@@ -52,7 +52,7 @@ export class RoutingComponent {
   public reset(): void {
     this.isOptimisedRouteLoaded = false;
     this.optimisedRoutePins = [];
-    this.optimisedRouteUrl = null
+    this.optimisedRouteUrls = null
     this.optimisedRoutes = null;
     this.unOptimisedRoutes = null;
   }

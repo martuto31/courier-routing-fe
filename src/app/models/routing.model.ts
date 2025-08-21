@@ -22,5 +22,5 @@ export interface OrderedLocation {
 
 export interface OptimisedRoute {
   locationOrder: OrderedLocation[];
-  googleMapsUrl: string;
+  googleMapsUrls: string[];
 }

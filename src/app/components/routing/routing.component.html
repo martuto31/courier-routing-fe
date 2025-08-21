@@ -1,3 +1,9 @@
+<!-- TODO: Link to google maps loaded with the initial addresses -->
+<!-- TODO: Add statistics to the route -->
+
+<!-- TODO: Donwload as PDF -->
+<!-- TODO: Add priority to work with only has and doesnt have priority -->
+
 <div class="container">
     @if (!isOptimisedRouteLoaded) {
         <h1>Качи файл с адреси</h1>
@@ -48,28 +54,20 @@
             </div>
         }
 
-        @if (optimisedRouteUrl) {
-            <div class="map-link">
-                <a [href]="optimisedRouteUrl" target="_blank" rel="noopener">
-                    Виж маршрута в Google Maps
-                </a>
+        @if (optimisedRouteUrls) {
+            @for (url of optimisedRouteUrls; track $index) {
+                <div class="map-link">
+                    <a [href]="optimisedRouteUrls" target="_blank" rel="noopener">
+                        Виж маршрут {{ $index }} в Google Maps
+                    </a>
 
-                <qrcode [qrdata]="optimisedRouteUrl" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
-            </div>
-
-            <!-- TODO: Make multiple google maps addresses if they are more than google can handle in 1 route -->
-            <!-- TODO: Link to google maps loaded with the initial addresses -->
-            <!-- TODO: Add statistics to the route -->
-            <!-- TODO: Deploy -->
-
-            <!-- TODO: Donwload as PDF -->
-            <!-- TODO: Add priority to work with only has and doesnt have priority -->
+                    <qrcode [qrdata]="optimisedRouteUrls[$index]" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+                </div>
+            }
         }
 
         <a class="btn btn-primary" (click)="reset()">
             Качи нов файл
         </a>
-
-        
     }
 </div>
