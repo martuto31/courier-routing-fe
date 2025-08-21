@@ -41,7 +41,7 @@
                     </ol>
                 </div>
                 <div class="right">
-                    <h4>Оптимизирани адреси</h4>
+                    <h4>Оптимизиран маршрут</h4>
 
                     <ol>
                         @for (route of optimisedRoutes; track $index) {
@@ -57,11 +57,11 @@
         @if (optimisedRouteUrls) {
             @for (url of optimisedRouteUrls; track $index) {
                 <div class="map-link">
-                    <a [href]="optimisedRouteUrls" target="_blank" rel="noopener">
-                        Виж маршрут {{ $index }} в Google Maps
+                    <a [href]="optimisedRouteUrls[$index]" target="_blank" rel="noopener">
+                        Маршрут {{ $index + 1 }} – Показване в Google Maps
                     </a>
 
-                    <qrcode [qrdata]="optimisedRouteUrls[$index]" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+                    <!-- <qrcode [qrdata]="optimisedRouteUrls[$index]" [width]="200" [errorCorrectionLevel]="'M'"></qrcode> -->
                 </div>
             }
         }
