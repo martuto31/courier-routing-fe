@@ -297,12 +297,26 @@ export class UploadFileComponent {
 
       formData.append('mapping', JSON.stringify(mapping));
 
-      const request = this.routingService.getOptimisedRouteFromFile(formData);
+      // const request = this.routingService.getOptimisedRouteFromFile(formData);
+      // const response = await lastValueFrom(request);
+
+      // if (response.status === 200) {
+      //   this.getOptimisedRouteResponse.emit(response.data ?? null);
+      //   this.saveMapping();
+      // } else if (response.status === 400) {
+      //   console.log(response.data)
+      // }
+
+      const request = this.routingService.getGeocodedAdresses(formData);
       const response = await lastValueFrom(request);
 
+      console.log(response.data)
+
       if (response.status === 200) {
-        this.getOptimisedRouteResponse.emit(response.data ?? null);
-        this.saveMapping();
+        // this.getOptimisedRouteResponse.emit(response.data ?? null);
+        // this.saveMapping();
+      } else if (response.status === 400) {
+        console.log(response.data)
       }
     } finally {
       this.isLoading = false;

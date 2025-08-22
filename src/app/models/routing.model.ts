@@ -13,6 +13,11 @@ export interface GetOptimisedRouteResponse {
   optimisedRoute: OptimisedRoute;
 }
 
+export interface GetGeocodedAddressesResponse {
+  geocodedAdresses: GeocodedAddress[];
+  notGeocodedAddresses: string[];
+}
+
 export interface OrderedLocation {
   address: string;
   lon: number;
