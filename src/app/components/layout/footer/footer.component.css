@@ -41,8 +41,12 @@ a {
 
 
 .logo > img {
-    height: 100px;
+    height: 70px;
     cursor: pointer;
+}
+
+:host-context(.mobile) .logo > img {
+    height: 40px;
 }
 
 .nav-links {

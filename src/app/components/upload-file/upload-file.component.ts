@@ -106,7 +106,7 @@ export class UploadFileComponent {
           this.notGeocodedAddresses = getGeoResponse.data!.notGeocodedAddresses;
           this.showNotGeocodedDialog = true;
         } else {
-          await this.sendForOptimisation(this.geocodedAddresses, this.notGeocodedAddresses);
+          await this.sendForOptimisation(getGeoResponse.data!.geocodedAdresses, this.notGeocodedAddresses);
         }
       }
     } finally {
