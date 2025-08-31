@@ -9,12 +9,6 @@ export const routes: Routes = [
     },
 
     {
-      path: 'za-nas',
-      loadComponent: () => import('./components/about-me/about-me.component').then(c => c.AboutMeComponent),
-      title: '',
-    },
-
-    {
       path: 'kontakti',
       loadComponent: () => import('./components/contact-me/contact-me.component').then(c => c.ContactMeComponent),
       title: '',
@@ -26,9 +20,9 @@ export const routes: Routes = [
       title: '',
     },
 
-    // {
-    //   path: 'login',
-    //   loadComponent: () => import('./components/auth/login/login.component').then(c => c.LoginComponent),
-    //   title: '',
-    // },
+    {
+      path: 'login',
+      loadComponent: () => import('./components/auth/login/login.component').then(c => c.LoginComponent),
+      title: '',
+    },
 ];

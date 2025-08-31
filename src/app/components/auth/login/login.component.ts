@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { AuthService } from './../../../services/auth.service';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 
 interface FormControls {
   email: FormControl<string | null>;
@@ -27,7 +28,8 @@ export class LoginComponent {
     private router: Router,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    private authService: AuthService,) {
+    private authService: AuthService,
+    private userService: UserService) {
 
     this.createForm();
   }
@@ -51,6 +53,8 @@ export class LoginComponent {
 
     switch (response.status) {
       case 200:
+        this.userService.setUserFromDatabase();
+
         this.router.navigate([ '' ]);
 
         break;

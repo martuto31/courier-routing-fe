@@ -29,3 +29,8 @@ export interface OptimisedRoute {
   locationOrder: OrderedLocation[];
   googleMapsUrls: string[];
 }
+
+export interface GetOptimisedRouteBody {
+  geocodedAddresses: GeocodedAddress[];
+  parsedAddresses?: string[]
+}

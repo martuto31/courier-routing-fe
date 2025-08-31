@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 
 import { ApiResponse, HttpService } from './http.service';
 
-import { GetGeocodedAddressesResponse, GetOptimisedRouteResponse } from './../models/routing.model';
+import { GetGeocodedAddressesResponse, GetOptimisedRouteBody, GetOptimisedRouteResponse } from './../models/routing.model';
+
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,12 @@ export class RoutingService {
   constructor(
     private httpService: HttpService) { }
 
-  private apiUrl: string = "http://localhost:3000/api/";
+  private apiUrl: string = environment.apiUrl;
 
-  public getOptimisedRouteFromFile(formData: FormData): Observable<ApiResponse<GetOptimisedRouteResponse>> {
+  public getOptimisedRoute(body: GetOptimisedRouteBody): Observable<ApiResponse<GetOptimisedRouteResponse>> {
     const url = this.apiUrl + 'routing/optimised-route';
 
-    return this.httpService.post(url, formData);
+    return this.httpService.post(url, body);
   }
 
   public getGeocodedAdresses(formData: FormData): Observable<ApiResponse<GetGeocodedAddressesResponse>> {

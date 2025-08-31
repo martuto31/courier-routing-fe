@@ -6,6 +6,7 @@ import { lastValueFrom } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 import { RoutingService } from './../../services/routing.service';
+import { GeocodedAddress } from '../../models/routing.model';
 
 @Component({
   selector: 'app-upload-file',
@@ -24,46 +25,110 @@ export class UploadFileComponent {
 
   @ViewChild('uploadFile') uploadFile!: ElementRef<HTMLInputElement>;
 
-  isLoading = false;
-  selectedFile: File | null = null;
+  public isLoading = false;
+  public selectedFile: File | null = null;
+  public showNotGeocodedDialog = false;
 
   // parsed data
-  headers: string[] = [];
-  rows: any[][] = [];
-  previewRows: any[][] = [];
+  public headers: string[] = [];
+  public rows: any[][] = [];
+  public previewRows: any[][] = [];
 
   // mapping form
-  mapForm = this.fb.group({
+  public mapForm = this.fb.group({
     address: ['', Validators.required],
     priority: [''],
     hasHeader: [true, { nonNullable: true }],
   });
 
   // convenience: computed indices
-  addressIndex = computed(() => this.headers.indexOf(this.mapForm.value.address || ''));
-  priorityIndex = computed(() => this.headers.indexOf(this.mapForm.value.priority || ''));
+  public addressIndex = computed(() => this.headers.indexOf(this.mapForm.value.address || ''));
+  public priorityIndex = computed(() => this.headers.indexOf(this.mapForm.value.priority || ''));
 
-  openFile(): void {
+  public geocodedAddresses: GeocodedAddress[] = [];
+  public notGeocodedAddresses: string[] = [];
+
+  public openFile(): void {
     this.uploadFile.nativeElement.click();
   }
 
-  dragOver(e: DragEvent) { e.preventDefault(); }
+  public dragOver(e: DragEvent): void { 
+    e.preventDefault();
+  }
 
-  fileDrop(e: DragEvent) {
+  public fileDrop(e: DragEvent): void {
     e.preventDefault();
     const files = e.dataTransfer?.files;
     if (files?.length) this.handleFile(files[0]);
   }
 
-  fileInput(e: Event) {
+  public fileInput(e: Event): void {
     const input = e.target as HTMLInputElement;
-    if (input?.files?.length) this.handleFile(input.files[0]);
+
+    if (input?.files?.length) {
+      this.handleFile(input.files[0]);
+    }
   }
 
-  private handleFile(file: File) {
+  public async sendFile(): Promise<void> {
+    if (!this.selectedFile) {
+      return;
+    }
+
+    if (this.mapForm.invalid) {
+      alert('Моля, изберете колоната за адрес.');
+
+      return;
+    }
+
+    this.isLoading = true;
+
+    try {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      // ТОДО: Рефактор за ретри
+
+      const mapping = {
+        hasHeader: this.mapForm.value.hasHeader,
+        addressColumn: this.mapForm.value.address,
+        priorityColumn: this.mapForm.value.priority || null,
+      };
+
+      formData.append('mapping', JSON.stringify(mapping));
+
+      const getGeoRequest = this.routingService.getGeocodedAdresses(formData);
+      const getGeoResponse = await lastValueFrom(getGeoRequest);
+
+      if (getGeoResponse.status === 200) {
+        if (getGeoResponse.data!.notGeocodedAddresses.length > 0) {
+          this.geocodedAddresses = getGeoResponse.data!.geocodedAdresses;
+          this.notGeocodedAddresses = getGeoResponse.data!.notGeocodedAddresses;
+          this.showNotGeocodedDialog = true;
+        } else {
+          await this.sendForOptimisation(this.geocodedAddresses, this.notGeocodedAddresses);
+        }
+      }
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  private async sendForOptimisation(geocodedAddresses: GeocodedAddress[], notGeocodedAddresses?: string[]) {
+    const getOptimisedRouteRequest = this.routingService.getOptimisedRoute({ geocodedAddresses, parsedAddresses: notGeocodedAddresses });
+    const getOptimisedRouteResponse = await lastValueFrom(getOptimisedRouteRequest);
+
+    if (getOptimisedRouteResponse.status === 200) {
+      this.getOptimisedRouteResponse.emit(getOptimisedRouteResponse.data ?? null);
+      this.saveMapping();
+    }
+  }
+
+  private handleFile(file: File): void {
     this.selectedFile = file;
 
     const reader = new FileReader();
+
     reader.onload = (ev: any) => {
       const data = new Uint8Array(ev.target.result);
       const wb = XLSX.read(data, { type: 'array' });
@@ -71,9 +136,10 @@ export class UploadFileComponent {
       // header:1 -> array-of-arrays
       const aoa: any[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-      if (!aoa?.length) return;
+      if (!aoa?.length) { 
+        return;
+      }
 
-      // Try to detect header row
       const firstRow = aoa[0];
       const likelyHasHeader = this.guessHasHeader(firstRow);
       this.mapForm.patchValue({ hasHeader: likelyHasHeader });
@@ -82,23 +148,18 @@ export class UploadFileComponent {
         this.headers = firstRow.map((h: any, i: number) => (h ? String(h) : `Column ${i + 1}`));
         this.rows = aoa.slice(1);
       } else {
-        // fabricate headers
         this.headers = firstRow.map((_: any, i: number) => `Column ${i + 1}`);
         this.rows = aoa;
       }
 
-      // preview
       this.previewRows = this.rows.slice(0, 5);
 
-      // auto-suggest mapping and load last-used
       this.autoSuggestMapping();
       this.loadSavedMapping();
     };
     reader.readAsArrayBuffer(file);
   }
 
-  // TODO: Check later
-  // Heuristics: find address-like / priority-like columns
   private autoSuggestMapping(): void {
     if (!this.headers?.length || !this.rows?.length) return;
 
@@ -213,7 +274,6 @@ export class UploadFileComponent {
       return { idx: colIdx, header: h, addressScore, priorityScore };
     });
 
-    // Pick best by score (ties resolved by “more address hits” then leftmost)
     const bestAddress = colScores
       .sort((a, b) =>
         b.addressScore - a.addressScore ||
@@ -228,29 +288,26 @@ export class UploadFileComponent {
         a.idx - b.idx
       )[0];
 
-    // Apply only if the scores are meaningful (thresholds)
     if (bestAddress && bestAddress.addressScore >= 4) {
       this.mapForm.controls.address.setValue(bestAddress.header);
     }
 
-    // avoid mapping the same column as both address & priority
     if (bestPriority && bestPriority.priorityScore >= 4 && bestPriority.idx !== bestAddress?.idx) {
       this.mapForm.controls.priority.setValue(bestPriority.header);
     }
 
-    // Fallback: if no priority found, try a looser guess (small numeric domain)
     if (!this.mapForm.controls.priority.value) {
       const loose = colScores.find(c => c.idx !== bestAddress?.idx && c.priorityScore >= 3);
       if (loose) this.mapForm.controls.priority.setValue(loose.header);
     }
   }
 
-  saveMapping() {
+  private saveMapping(): void {
     const val = this.mapForm.value;
     localStorage.setItem('columnMapping', JSON.stringify(val));
   }
 
-  loadSavedMapping() {
+  private loadSavedMapping(): void {
     const raw = localStorage.getItem('columnMapping');
 
     if (!raw) {
@@ -272,58 +329,6 @@ export class UploadFileComponent {
     }
   }
 
-  async sendFile(): Promise<void> {
-    if (!this.selectedFile) {
-      return;
-    }
-
-    if (this.mapForm.invalid) {
-      alert('Моля, изберете колоната за адрес.');
-
-      return;
-    }
-
-    this.isLoading = true;
-
-    try {
-      const formData = new FormData();
-      formData.append('file', this.selectedFile);
-
-      const mapping = {
-        hasHeader: this.mapForm.value.hasHeader,
-        addressColumn: this.mapForm.value.address,
-        priorityColumn: this.mapForm.value.priority || null,
-      };
-
-      formData.append('mapping', JSON.stringify(mapping));
-
-      // const request = this.routingService.getOptimisedRouteFromFile(formData);
-      // const response = await lastValueFrom(request);
-
-      // if (response.status === 200) {
-      //   this.getOptimisedRouteResponse.emit(response.data ?? null);
-      //   this.saveMapping();
-      // } else if (response.status === 400) {
-      //   console.log(response.data)
-      // }
-
-      const request = this.routingService.getGeocodedAdresses(formData);
-      const response = await lastValueFrom(request);
-
-      console.log(response.data)
-
-      if (response.status === 200) {
-        // this.getOptimisedRouteResponse.emit(response.data ?? null);
-        // this.saveMapping();
-      } else if (response.status === 400) {
-        console.log(response.data)
-      }
-    } finally {
-      this.isLoading = false;
-    }
-  }
-  
-  // crude guess: header row if most cells are non-numeric strings
   private guessHasHeader(firstRow: any[]): boolean {
     const cells = firstRow ?? [];
 

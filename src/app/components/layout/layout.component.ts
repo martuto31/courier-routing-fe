@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { FooterComponent } from './footer/footer.component';
-import { LandingComponent } from './../landing/landing.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { DimensionService } from './../../services/dimension.service';
@@ -15,7 +14,6 @@ import { DimensionService } from './../../services/dimension.service';
   imports: [
     RouterOutlet,
     FooterComponent,
-    LandingComponent,
     NavigationComponent,
   ],
 })

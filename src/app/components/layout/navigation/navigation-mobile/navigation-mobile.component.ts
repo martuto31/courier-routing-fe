@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+
+import { UserService } from './../../../../services/user.service';
+import { User } from './../../../../models/user.model';
 
 @Component({
   selector: 'app-navigation-mobile',
@@ -26,9 +29,25 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 export class NavigationMobileComponent {
 
+  constructor(public userService: UserService) {
+    this.subscribeToUser();
+  }
+
   public isExpanderOpen = false;
+  
+  public user: User | null = null
 
   private bodyEl = document.querySelector('body') as HTMLBodyElement;
+
+  public logout(): void {
+    this.userService.logout();
+  }
+
+  private subscribeToUser(): void {
+    effect(() => {
+      this.user = this.userService.user();
+    });
+  }
 
   public triggerAnimation(): void {
     this.isExpanderOpen = !this.isExpanderOpen;

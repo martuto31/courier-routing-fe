@@ -1,35 +1,32 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { lastValueFrom } from 'rxjs';
+import { UserService } from './../../services/user.service';
 
-import { AuthService } from './../../services/auth.service';
-
-export const authGuard = () => {
+export const authGuard = (isAdmin: boolean) => {
   return async() => {
     const router = inject(Router);
-    const authService = inject(AuthService);
+    const userService = inject(UserService);
 
     const token = localStorage.getItem('accessToken');
 
     if (!token) {
-        return router.navigate(['/login']);
+      return router.navigate(['/login']);
     }
 
-    const request = authService.getUser();
-    const repsonse = await lastValueFrom(request);
+    let user = userService.user();
 
-    if (repsonse.status !== 200) {
-        return router.navigate(['/login']);
+    if (!user) {
+      await userService.setUserFromDatabase();
+
+      user = userService.user();
     }
 
-    const user = repsonse.data;
-
-    if (!user || !user.enabled) {
-        return router.navigate(['/login']);
+    if (isAdmin && user!.enabled) {
+      return true;
+    } else {
+      return false;
     }
-
-    return true;
 
   }
 }

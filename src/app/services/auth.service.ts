@@ -6,6 +6,8 @@ import { ApiResponse, HttpService } from './http.service';
 
 import { LoginBody, User } from './../models/user.model';
 
+import { environment } from './../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,7 @@ export class AuthService {
   constructor(
     private httpService: HttpService) { }
 
-  private apiUrl: string = "";
+  private apiUrl: string = environment.apiUrl;
 
   public login(body: LoginBody): Observable<ApiResponse<void>> {
     const url = this.apiUrl + 'auth/login';

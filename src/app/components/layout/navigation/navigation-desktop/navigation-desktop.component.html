@@ -1,11 +1,19 @@
 <div class="container">
     <div>
-        <img src="assets/img/logo-side.webp" class="logo" routerLink="" alt="An image of the logo">
+        <img src="assets/img/logo.png" class="logo" routerLink="" alt="An image of the logo">
     </div>
 
     <div class="actions">
         <a routerLink="">Начало</a>
         <a routerLink="optimizirai-marshrut">Оптимизирай маршрут</a>
         <a routerLink="kontakti">Контакти</a>
+    </div>
+
+    <div class="actions">
+        @if (user && user.enabled) {
+            <a (click)="logout()">Изход</a>
+        } @else {
+            <a routerLink="login">Вход</a>
+        }
     </div>
 </div>
