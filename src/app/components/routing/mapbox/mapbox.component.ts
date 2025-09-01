@@ -22,6 +22,7 @@ export class MapboxComponent {
   public map!: mapboxgl.Map;
 
   public ngAfterViewInit(): void {
+    this.initMapbox();
 
     // this.map.on('load', () => {
     //   this.pins.forEach((pin, index) => {

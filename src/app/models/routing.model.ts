@@ -15,7 +15,7 @@ export interface GetOptimisedRouteResponse {
 
 export interface GetGeocodedAddressesResponse {
   geocodedAdresses: GeocodedAddress[];
-  notGeocodedAddresses: string[];
+  notGeocodedAddresses: ParsedAddress[];
 }
 
 export interface OrderedLocation {

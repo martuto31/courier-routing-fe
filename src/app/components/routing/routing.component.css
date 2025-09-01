@@ -34,3 +34,7 @@
     justify-content: center;
     gap: 30px;
 }
+
+.map-link {
+    padding-bottom: 24px;
+}

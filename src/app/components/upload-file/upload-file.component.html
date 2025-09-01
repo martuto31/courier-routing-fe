@@ -71,6 +71,31 @@
   }
 </div>
 
+@if (showNotGeocodedDialog) {
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h2>Неуспешно геокодирани адреси</h2>
+
+      <p>Следните адреси не могат да бъдат намерени:</p>
+
+      <ul>
+        @for (parsedAddress of notGeocodedAddresses; track $index) {
+          <li>
+            <input [(ngModel)]="parsedAddress.address" />
+
+            <button (click)="onRemoveAddress($index)">Пропусни</button>
+          </li>
+        }
+      </ul>
+
+      <div class="modal-actions">
+        <button (click)="onCancel()">Отказ</button>
+        <button (click)="sendFile()">Повтори геокодирането</button>
+      </div>
+    </div>
+  </div>
+}
+
 @if (isLoading) {
   <div class="loader-container">
     <div class="loader"></div>
