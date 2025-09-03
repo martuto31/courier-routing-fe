@@ -22,13 +22,31 @@ export class RoutingService {
   public getOptimisedRoute(body: GetOptimisedRouteBody): Observable<ApiResponse<GetOptimisedRouteResponse>> {
     const url = this.apiUrl + 'routing/optimised-route';
 
-    return this.httpService.post(url, body);
+    // TODO: Refactor = dupl
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+  
+    const headers = {
+      Authorization: `${accessToken}`,
+      'x-refresh-token': `${refreshToken}`,
+    };
+
+    return this.httpService.post(url, body, 'json', headers);
   }
 
   public getGeocodedAdresses(formData: FormData): Observable<ApiResponse<GetGeocodedAddressesResponse>> {
     const url = this.apiUrl + 'routing/geocode-addresses';
 
-    return this.httpService.post(url, formData);
+    // TODO: Refactor - dupl
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+  
+    const headers = {
+      Authorization: `${accessToken}`,
+      'x-refresh-token': `${refreshToken}`,
+    };
+
+    return this.httpService.post(url, formData, 'json', headers);
   }
 
 
